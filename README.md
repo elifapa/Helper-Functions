@@ -3,9 +3,9 @@
 
 This repo consists of helper functions for me, maybe they could help you aswell.
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis  
 
-**Heat map with annotations**
+**Heat map with annotations**  
 ```python
 correlation = df.corr().abs()
 plt.figure(figsize=(8,8))
@@ -14,8 +14,8 @@ sns.heatmap(correlation, annot=True)
 plt.show()
 ```
 
-## Feature Selection
-**Feature Selection with SelectKBest**
+## Feature Selection  
+**Feature Selection with SelectKBest**  
 ```python
 from sklearn.feature_selection import SelectKBest
 
@@ -24,29 +24,62 @@ k_best_features = kbest.fit_transform(features, target)
 list(df.columns[kbest.get_support(indices=True)])
 ```
 
-## Preprocessing
-**Concatenate One Hot Encoded Categorical Variables**
+## Preprocessing  
+
+**Binning Continuous Features**  
 ```python
-df = pd.concat([df, pd.get_dummies(df["col"], prefix="col")], axis=1)
-df.drop(["col"], axis=1, inplace=True)
+data['colnameBin']=pd.qcut(alldata['colname'],binnumber)
 ```
 
+### Feature Scaling   
+
+**Concatenate One Hot Encoded Nominal Variables**   
+```python
+def encode_and_bind(original_df, feature_to_encode):
+    dummies = pd.get_dummies(original_df[feature_to_encode], prefix=feature_to_encode)
+    res = pd.concat([original_df, dummies], axis=1)
+    res=res.drop(feature_to_encode, axis=1)
+    return(res)  
+```
+
+**Label Encoding for Non-Numerical Features**   
+```python
+data[col] = LabelEncoder().fit_transform(data[col])
+ ```
+ 
 **Scaling**
+1. MinMaxScaler
 ```python
 from sklearn.preprocessing import MinMaxScaler
 
 scaler = MinMaxScaler()
 scaled_columns = pd.DataFrame(scaler.fit_transform(df[columns_to_scale]), columns=columns_to_scale)
 ```
+2. StandardScaler
+```python
+std_scaler = StandardScaler()
+X_train = std_scaler.fit_transform(X)
+X_test = std_scaler.transform(test)
+```
 
 **Get list of numerical variables**
 ```python
 num_vars = [ var for var in data.columns if data[var].dtypes != ‘O’]
 ```
+or 
+
+```python
+num_vars =data.select_dtypes(exclude=['object'])
+```
 
 **Get list of categorical variables**
 ```python
 cat_vars = [var for var in data.columns if data[var].dtypes == ‘O’]
+```
+or
+
+```python
+cat_vars= data.select_dtypes(include=['object'])
 ```
 
 ## Deployment
