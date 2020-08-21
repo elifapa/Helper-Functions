@@ -82,6 +82,21 @@ or
 cat_vars= data.select_dtypes(include=['object'])
 ```
 
+**Log transform skewed numeric features and/or target**
+```python
+skewed_vars = train[num_vars].apply(lambda x: skew(x.dropna())) #compute skewness
+skewed_vars = skewed_vars[skewed_feats > 0.75]
+skewed_vars = skewed_vars.index
+
+all_data[skewed_vars] = np.log1p(all_data[skewed_vars])
+```
+
+**split the train and test from alldata df**
+```python
+X_train = all_data[:train.shape[0]]
+X_test = all_data[train.shape[0]:]
+```
+
 ## Deployment
 **Using joblib to save models and pipelines**
 ```python
