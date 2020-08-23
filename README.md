@@ -38,9 +38,10 @@ list(df.columns[kbest.get_support(indices=True)])
 data['colnameBin']=pd.qcut(alldata['colname'],binnumber)
 ```
 
-### Feature Scaling   
+**Feature Transformation**
 
-**Concatenate One Hot Encoded Nominal Variables**   
+1. Concatenate One Hot Encoded Nominal Variables 
+
 ```python
 def encode_and_bind(original_df, feature_to_encode):
     dummies = pd.get_dummies(original_df[feature_to_encode], prefix=feature_to_encode)
@@ -49,7 +50,8 @@ def encode_and_bind(original_df, feature_to_encode):
     return(res)  
 ```
 
-**Label Encoding for Non-Numerical Features**   
+2. Label Encoding for Non-Numerical Features
+
 ```python
 data[col] = LabelEncoder().fit_transform(data[col])
  ```
