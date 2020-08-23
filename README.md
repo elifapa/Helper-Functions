@@ -1,7 +1,14 @@
 ![Helpers](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/05df8cc2-4413-4a7c-93c7-dbf7991b18a7/ddz9ebz-a8b8ba76-12be-44a6-b2e2-2e71a3da836c.png/v1/fill/w_1280,h_420,q_80,strp/helpers_new_by_markdownimgmn_ddz9ebz-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD00MjAiLCJwYXRoIjoiXC9mXC8wNWRmOGNjMi00NDEzLTRhN2MtOTNjNy1kYmY3OTkxYjE4YTdcL2RkejllYnotYThiOGJhNzYtMTJiZS00NGE2LWIyZTItMmU3MWEzZGE4MzZjLnBuZyIsIndpZHRoIjoiPD0xMjgwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.NuORQgZXDNMoX9_76S4aM3G9bl_HtdikntfLa9p3Pqk)
-## Helper Functions
+
+# Helper Functions
 
 This repo consists of helper functions for me, maybe they could help you aswell.
+
+## Pandas Options
+```python
+pd.options.display.max_rows = 1000
+pd.options.display.max_columns = 40
+``` 
 
 ## Exploratory Data Analysis  
 
@@ -10,7 +17,7 @@ This repo consists of helper functions for me, maybe they could help you aswell.
 correlation = df.corr().abs()
 plt.figure(figsize=(8,8))
 
-sns.heatmap(correlation, annot=True)
+sns.heatmap(correlation, annot=True, cmap='RdYlBu') #good cmap
 plt.show()
 ```
 
@@ -74,12 +81,12 @@ num_vars =data.select_dtypes(exclude=['object'])
 
 **Get list of categorical variables**
 ```python
-cat_vars = [var for var in data.columns if data[var].dtypes == ‘O’]
+cat_vars = [var for var in data.columns if data[var].dtypes == ‘O’] #returns col names
 ```
 or
 
 ```python
-cat_vars= data.select_dtypes(include=['object'])
+cat_vars= data.select_dtypes(include=['object']) #returns df
 ```
 
 **Log transform skewed numeric features and/or target**
