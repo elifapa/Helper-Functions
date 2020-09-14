@@ -8,7 +8,7 @@ This repo consists of helper functions for me, maybe they could help you aswell.
 ```python
 pd.options.display.max_rows = 1000
 pd.options.display.max_columns = 40
-``` 
+```
 
 ## Exploratory Data Analysis  
 
@@ -19,6 +19,17 @@ plt.figure(figsize=(8,8))
 
 sns.heatmap(correlation, annot=True, cmap='RdYlBu') #good cmap
 plt.show()
+```
+
+**Change plotted legend**
+```python
+#g: sns.lmplot(..., legend_out=True)
+# title
+new_title = 'My title'
+g._legend.set_title(new_title)
+# replace labels
+new_labels = ['label 1', 'label 2']
+for t, l in zip(g._legend.texts, new_labels): t.set_text(l)
 ```
 
 ## Feature Selection  
